@@ -17,6 +17,12 @@ public class MemberVariableRangeDemo {
 		//id, a, b의 유효범위는 methodA에서만 사용가능
 	}
 	
+	public int methodB(int a) {
+		int c = a + 10;
+		
+		return c;
+	}
+	
 	public static void main(String[] args) {
 		MemberVariableRangeDemo m = new MemberVariableRangeDemo();
 		//멤버변수는 객체를 생성하면 기본값을 갖는다.
@@ -24,6 +30,7 @@ public class MemberVariableRangeDemo {
 		System.out.println(m.age);
 		System.out.println(m.weight);
 		System.out.println(m.isReleased);
+		System.out.println(m.methodB(3));
 	}
 
 }
