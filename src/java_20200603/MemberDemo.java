@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class MemberDemo {
 	public static void main(String[] args) {
-		MemberDaoDemo mdao = new MemberDaoDemo();
+		MemberDao mdao = new MemberDao();
 		
 		int num = 11;
 		//String name = "워렌 버핏";

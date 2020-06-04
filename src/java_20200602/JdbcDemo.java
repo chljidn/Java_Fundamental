@@ -36,7 +36,7 @@ public class JdbcDemo {
 			                                             //StringBuffer를 toString() 메서드를 통해서 String으로 변환.
 			
 			//4. 바인딩 변수 설정과 쿼리문 전송
-			pstmt.setInt(1, 8);
+			pstmt.setInt(1, 8);//SetInt or SetString or SetDouble...(인덱스 위치, 값) - 인덱스를 값으로 지정함.
 			pstmt.setString(2, "런정페이");
 			pstmt.setString(3, "중국");
 			

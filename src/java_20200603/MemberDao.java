@@ -10,9 +10,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class MemberDao {
-	public int insert(MemberDto m) {
-		int resultCount = 0;
-
+	
+	public MemberDao() {
 		try {
 			Class.forName("org.mariadb.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
@@ -20,8 +19,11 @@ public class MemberDao {
 			e.printStackTrace();
 		}
 		
-		
-		
+	}
+	
+	public int insert(MemberDto m) {
+		int resultCount = 0;
+
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
@@ -32,7 +34,7 @@ public class MemberDao {
 			
 			pstmt = con.prepareStatement(sql.toString());
 			int index = 0;
-			pstmt.setInt(++index, m.getNum());
+			pstmt.setInt(++index, m.getNum());//++index번째 바인딩변수를 m.getNum()으로 입력함.
 			pstmt.setString(++index, m.getName());
 			pstmt.setString(++index, m.getAddr());
 			
@@ -48,24 +50,14 @@ public class MemberDao {
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-				}
-			
+				}	
 		}
-		
-		return resultCount;
-				
+		return resultCount;	
 	}
 	
 	
 	public int update(MemberDto m) {
 		int resultCount = 0;
-		
-		try {
-			Class.forName("org.mariadb.jdbc.Driver");
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -94,23 +86,14 @@ public class MemberDao {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-		}
-		
+		}	
 		return resultCount;
-		
-		
-		
+
 	}
 	
 	public int delete(int num) {
 		int resultCount = 0;
-		try {
-			Class.forName("org.mariadb.jdbc.Driver");
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		
@@ -125,10 +108,7 @@ public class MemberDao {
 			int index = 0;
 			pstmt.setInt(++index, num);
 			
-			resultCount = pstmt.executeUpdate();
-			
-			
-			
+			resultCount = pstmt.executeUpdate();	
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -141,21 +121,14 @@ public class MemberDao {
 				e.printStackTrace();
 			}
 		}
-	
-		
+
 		return resultCount;
 	}
 	
 	
 	public ArrayList<MemberDto> select() {
 		ArrayList<MemberDto> list = new ArrayList<MemberDto>();
-		
-		try {
-			Class.forName("org.mariadb.jdbc.Driver");
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
 		
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -173,6 +146,9 @@ public class MemberDao {
 			
 			pstmt = con.prepareStatement(sql.toString());
 			
+			//select문을 사용할 경우에는 executeQuery()를 사용해야 한다(insert, update,delete문을 사용할 경우에는 executeUpdate()를 사용)
+			//executeQuerty : PreparedSatement를 통해 SQL을 실행한 값을 ResulsSet에 전달하는 역할.
+			//ResultSet객체를 생성한 변수 rs에 저장을 한번 해준 것이고 커서 단위로 값을 출력하는 ResultSet의 특징을 사용해 원하는 sQL값을 rs변수를 통해서 출력 가능.
 			rs = pstmt.executeQuery(); //수행결과로 ResultSet객체의 값을 반환한다/
 			while(rs.next()) {
 				int index = 0;
@@ -206,14 +182,6 @@ public class MemberDao {
 	public MemberDto select(int num) {
 		MemberDto mdto = null;
 		
-		try {
-			Class.forName("org.mariadb.jdbc.Driver");
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		//ResultSet 클래스 : 쿼리문이 실행되어 결과로 반환된 데이터들을 관리하는 클래스
@@ -230,6 +198,7 @@ public class MemberDao {
 			pstmt.setInt(1, num);
 			
 			rs = pstmt.executeQuery();
+			
 			
 			if(rs.next()) {
 				int index = 0;
