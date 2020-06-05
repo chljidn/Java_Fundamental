@@ -5,7 +5,7 @@ import java.net.UnknownHostException;
 
 public class InetAddressDemo {
 	public static void main(String[] args) throws UnknownHostException {
-		//InetAddress 클래스
+		//InetAddress 클래스 - ip주소를 다루기 위한 클래스
 		InetAddress i = InetAddress.getLocalHost(); 
 		System.out.printf("호스트 이름 : %s%n",i.getHostName());
 		System.out.printf("호스트 IP : %s%n",i.getHostAddress());
